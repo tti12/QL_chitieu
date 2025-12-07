@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -12,37 +12,38 @@
 </head>
 
 <body>
-
+    
     <div class="header">
         <h2>Chào mừng bạn</h2>
         <button id="logoutBtn" onclick="logout()">
             <i class="fas fa-sign-out-alt"></i> Đăng xuất
         </button>
     </div>
-
     <div class="main-content">
         <div class="menu">
-            <a href="/QL_chitieu/view/index.html">Trang Chủ</a>
-            <a href="/QL_chitieu/page/muctieu.html">Mục Tiêu Tiết Kiệm</a>
-            <a href="/QL_chitieu/page/thongke.html" class="active">Báo Cáo Thống Kê</a>
+            <a href="/QL_chitieu/view/">Trang Chủ</a>
+             <a href="/QL_chitieu/page/muctieu.html">Mục Tiêu Tiết Kiệm</a>
+            <a href="/QL_chitieu/page/thongke.html">Báo Cáo Thống Kê</a>
         </div>
 
         <div class="content-area">
-            <!-- Pie Chart -->
-            <div class="chart-container">
+            <div class="chart-container" style="width: 350px; height: 350px; float: left; margin: 20px;">
                 <canvas id="pieChart"></canvas>
-                <p id="noDataMessage" style="display:none;">Chưa có khoản chi tiêu nào.</p>
+                <p id="noDataMessage" style="text-align:center; font-size:16px; margin-top:10px; display:none;">
+                    Chưa có khoản chi tiêu nào.
+                </p>
             </div>
 
-            <!-- Bar Chart -->
-            <div class="chart-container">
+            <div class="chart-container" style="width: 550px; height: 350px;">
                 <canvas id="barChart"></canvas>
-                <p id="noDataBarMessage" style="display:none;">Chưa có dữ liệu biểu đồ cột.</p>
+                <p id="noDataBarMessage" style="text-align:center; font-size:16px; margin-top:10px; display:none;">
+                    Chưa có dữ liệu biểu đồ cột.
+                </p>
             </div>
+
         </div>
     </div>
-
-    <script src="thongke.js"></script>
+    <script src="thongle.js"></script>
     <script src="/QL_chitieu/view/script.js"></script>
 </body>
 
