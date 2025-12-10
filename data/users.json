@@ -1,0 +1,51 @@
+[
+  {
+    "id": 1,
+    "username": "demo",
+    "password_hash": "$2a$10$t951FF8qKeflSkBLP2Y1UO24zp2K/vDxWG2PGWLU1eMqpz6bwqVBS",
+    "email": "demo@example.com",
+    "name": "Demo"
+  },
+  {
+    "id": 2,
+    "username": "alice",
+    "password_hash": "$2a$10$5SHGqG5FN1AJmKVNknp/z.t4d5sptTG0vHPgVP6FC3W8eMLQGU3Fu",
+    "email": null,
+    "name": null
+  },
+  {
+    "id": 3,
+    "username": "dtri548@gmail.com",
+    "password_hash": "$2a$10$LmF7bCyam3nCd9CXTxb6IOUvdRrozecdbQx77fFTraDPIg0qjcNNK",
+    "email": "dtri548@gmail.com",
+    "name": "Dương Cao Trí"
+  },
+  {
+    "id": 4,
+    "username": "tri1234",
+    "password_hash": "$2a$10$OuuN1wBnr43U/dleXpQtcObx6wKSb3QDJ1ITX/bY1QgIW/zSTotyO",
+    "email": null,
+    "name": null
+  },
+  {
+    "id": 3,
+    "username": "dtri548@gmail.com",
+    "password_hash": "$2a$10$LmF7bCyam3nCd9CXTxb6IOUvdRrozecdbQx77fFTraDPIg0qjcNNK",
+    "email": "dtri548@gmail.com",
+    "name": "Dương Cao Trí"
+  },
+  {
+    "id": 5,
+    "username": "tridc22v7n535@vlvh.ctu.edu.vn",
+    "password_hash": "$2a$10$POeo2PsB.cCcqPRHazVpge4wWD6S0AyDQLGBblzcKAqLrCcIoQumK",
+    "email": "tridc22v7n535@vlvh.ctu.edu.vn",
+    "name": "Dương Cao Trí"
+  },
+  {
+    "id": 6,
+    "username": "trisnef",
+    "password_hash": "$2a$10$oaqMdOZAHim1fK7VCs5kKuJJVkj4d51PUstSTw0J6pjQI2sUEbr2m",
+    "email": "tricao1wq@gmail.com",
+    "name": "Dương Cao Trí"
+  }
+]

@@ -1,0 +1,22 @@
+### Test endpoints
+GET http://localhost:3000/hello
+
+### Register
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+  "username": "demo",
+  "password": "demo123",
+  "email": "demo@example.com",
+  "name": "Demo"
+}
+
+### Login
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "username": "demo",
+  "password": "demo123"
+}

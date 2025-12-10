@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Báo Cáo Thống Kê</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* ===========================
+   Mobile Responsive
+   =========================== */
+@media (max-width: 768px) {
+
+    /* Header */
+    .header {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    #logoutBtn {
+        width: 100%;
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    /* Layout tổng */
+    .main-content {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    /* Menu dọc trên mobile */
+    .menu {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .menu a {
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+        font-size: 17px;
+    }
+
+    /* Chart container */
+    .content-area {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .chart-container {
+        width: 100% !important;
+        height: auto !important;
+        margin: 10px 0 !important;
+    }
+
+    canvas {
+        max-width: 100%;
+        height: auto !important;
+    }
+}
+
+/* ===========================
+   Mobile nhỏ ≤ 480px
+   =========================== */
+@media (max-width: 480px) {
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .menu a {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    #logoutBtn {
+        font-size: 15px;
+        padding: 10px;
+    }
+}
+
+    </style>
+
+</head>
+
+<body>
+    
+    <div class="header">
+        <h2>Chào mừng bạn</h2>
+    </div>
+    <div class="main-content">
+        <div class="menu">
+            <a href="./index.html">Trang Chủ</a>
+             <a href="./muctieu.html">Mục Tiêu Tiết Kiệm</a>
+            <a href="./thongke.html">Báo Cáo Thống Kê</a>
+        </div>
+
+        <div class="content-area">
+            <div class="chart-container" style="width: 350px; height: 350px; float: left; margin: 20px;">
+                <canvas id="pieChart"></canvas>
+                <p id="noDataMessage" style="text-align:center; font-size:16px; margin-top:10px; display:none;">
+                    Chưa có khoản chi tiêu nào.
+                </p>
+            </div>
+
+            <div class="chart-container" style="width: 550px; height: 350px;">
+                <canvas id="barChart"></canvas>
+                <p id="noDataBarMessage" style="text-align:center; font-size:16px; margin-top:10px; display:none;">
+                    Chưa có dữ liệu biểu đồ cột.
+                </p>
+            </div>
+
+        </div>
+    </div>
+    <script src="./thongle.js"></script>
+    <script src="../view/script.js"></script>
+</body>
+
+</html>

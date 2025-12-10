@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./budget-savings.css">
+</head>
+
+<body>
+    <div class="header">
+        <h2>Mục Tiêu Tiết Kiệm</h2>
+    </div>
+
+    <div class="main-content">
+        <nav class="menu">
+            <a href="./index.html">Trang Chủ</a>
+            <a href="./muctieu.html">Mục Tiêu Tiết Kiệm</a>
+            <a href="./thongke.html">Báo Cáo Thống Kê</a>
+        </nav>
+        <section class="content-area" style="display: flex; gap: 20px;">
+
+            <!-- Bên trái: Dashboard mục tiêu -->
+            <div class="goal-dashboard" style="flex: 1; margin: 20px;">
+                <div class="goal-input-container">
+                    <h2>Thêm mục tiêu tiết kiệm</h2>
+                    <form id="goalForm">
+                        <input type="text" id="goalName" placeholder="Tên mục tiêu" required />
+                        <input type="number" id="goalAmount" placeholder="Số tiền (đ)" min="0" required />
+                        <button type="submit">Thêm mục tiêu</button>
+                    </form>
+                </div>
+
+                <div class="goal-list-container">
+                    <h2>Danh sách mục tiêu</h2>
+                    <ul id="goalList"></ul>
+                </div>
+            </div>
+
+            <!-- Bên phải: Cảnh báo & Ngân sách -->
+            <!-- Cảnh báo chi tiêu và nhập ngân sách -->
+            <div class="right-panel">
+
+                <!-- Nhập ngân sách -->
+                <div class="budget-container">
+                    <h3>Ngân sách tháng</h3>
+                    <input type="number" id="monthlyBudgetInput" placeholder="Nhập ngân sách (đ)" min="0"
+                        style="width: 80%; padding: 8px; margin-top: 10px; border-radius: 5px; border: 1px solid #ccc;" />
+                    <button id="setBudgetBtn"
+                        style="margin-top: 10px; padding: 8px 12px; border: none; border-radius: 5px; background-color: #87cefa; cursor: pointer;">
+                        Cập nhật ngân sách
+                    </button>
+                </div>
+
+                <!-- Cảnh báo chi tiêu -->
+                <div id="expenseAlert" class="alert-box">
+                    <strong id="alertMessage"> Bạn sắp vượt ngân sách!</strong>
+                    <div class="progress-container">
+                        <div id="expenseProgress" style="width: 0%; height: 100%;"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span id="totalExpenseDisplay">Chi tiêu: 0đ</span>
+                        <span id="budgetDisplay">Ngân sách: 0đ</span>
+                    </div>
+                    <div id="largeExpensesList" style="margin-top: 10px;"></div>
+                </div>
+
+            </div>
+
+
+        </section>
+    </div>
+    <script src="./muctieu.js"></script>
+</body>
+
+</html>

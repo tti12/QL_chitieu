@@ -6,184 +6,329 @@
     padding: 0;
 }
 
-/* BODY & LAYOUT */
 body {
-    background-color: #bebcbc;
-    /* nền sáng dịu mắt */
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     height: 100vh;
+    color: #ffffff;
 }
 
 body.center-body {
     display: flex;
     justify-content: center;
     align-items: center;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
 }
 
-/* CONTAINER – LOGIN / REGISTER */
-.container {
-    background: #f5f5f5;
-    /* sáng hơn */
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 15px 25px 45px rgba(0, 0, 0, 0.702);
-    width: 320px;
-    text-align: center;
-    transition: background-color 0.8s ease;
-    animation-name: test;
-
-}
-
-.container.login-bg {
-    background-color: #ffffffaa;
-    transition:
-        background-color 0.4s ease,
-        box-shadow 0.4s ease;
-}
-
-.container.register-bg {
-    background-color: #f0f0f0aa;
-    box-shadow: 15px 25px 45px rgba(80, 89, 255, 0.702);
-    transition:
-        background-color 0.4s ease,
-        box-shadow 0.4s ease;
-}
-
-/* LOGIN / REGISTER SLIDE */
-
+/* ================================
+   LOGIN & REGISTER – FLIP CARD
+================================ */
 
 .auth-wrapper {
+    width: 380px;
+    height: 460px;
     position: relative;
-    width: 350px;
-    height: 380px;
-    overflow: hidden;
+    perspective: 1000px;
+    animation: spinIn 0.8s ease-out;
 }
 
-/* Hai form đăng nhập & đăng ký */
-.auth-form {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    transition: all 0.4s ease-in-out;
-    opacity: 1;
+/* Small decorative icon above the auth card */
+.auth-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 64px;
+    color: #87cefa;
+    margin-bottom: 14px;
+    text-shadow: 0 6px 20px rgba(135,206,250,0.22);
+    transition: transform 0.45s ease, opacity 0.45s ease;
+}
+.auth-icon i {
+    display: inline-block;
+}
+.auth-icon:hover {
+    transform: translateY(-4px) scale(1.02);
 }
 
-/* Form bị ẩn */
-.auth-form.hidden {
-    opacity: 0;
-    transform: translateX(100%);
-    pointer-events: none;
-}
-
-/* Form đang hiển thị */
-.auth-form.active {
-    opacity: 1;
-    transform: translateX(0);
-    pointer-events: auto;
-}
-
-/* Login trượt sang trái khi chuyển sang đăng ký */
-.auth-form.slide-left {
-    transform: translateX(-100%);
-    opacity: 0;
-    pointer-events: none;
-}
-
-
-/* ANIMATION */
-@keyframes test {
+@keyframes spinIn {
     from {
-        background-color: #f5f5f5;
+        opacity: 0;
+        transform: rotateX(-30deg) rotateY(30deg) scale(0.9);
     }
-
     to {
-        background-color: #3cf1eb;
+        opacity: 1;
+        transform: rotateX(0) rotateY(0) scale(1);
     }
 }
 
-/* TYPOGRAPHY – H2 / INPUT / BUTTON / LINK */
-h2 {
-    margin-bottom: 20px;
-    color: #000000;
-}
-
-input {
+.auth-card {
     width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    height: 100%;
+    position: relative;
+    transition: transform 0.8s ease;
+    transform-style: preserve-3d;
 }
 
-button {
+.auth-card.flip {
+    transform: rotateY(180deg);
+}
+
+ .auth-face {
+    position: absolute;
     width: 100%;
-    padding: 10px;
-    margin-top: 12px;
-    border: none;
-    border-radius: 5px;
-    background: #87cefa;
-    /* xanh nhạt */
-    color: #000000;
-    font-size: 16px;
-    cursor: pointer;
+    height: 100%;
+    backface-visibility: hidden;
+    background: linear-gradient(135deg, #2d3561 0%, #1a1a2e 100%);
+    padding: 36px;
+    border-radius: 16px;
+    box-shadow: 0 18px 50px rgba(0,0,0,0.55);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    /* distribute space so h2 (title) and .link align evenly with form in between */
+    justify-content: space-between;
+    border: 2px solid #87cefa;
+    gap: 22px; /* increase spacing between inputs and headings */
+}
+.auth-front {
+    transform: rotateY(0deg);
 }
 
-button:hover {
-    background: #7ec0ee;
-    transition-duration: 0.3s;
+.auth-back {
+    transform: rotateY(180deg);
 }
 
-.link {
-    margin-top: 10px;
+.auth-face h2 {
+    margin: 0 0 6px 0;
+    color: #87cefa;
+    font-size: 24px;
+    text-shadow: 0 2px 10px rgba(135, 206, 250, 0.3);
+}
+
+/* Floating label input group */
+.input-group {
+    position: relative;
+    margin: 0 0 0 0; /* spacing handled by .auth-face gap for consistent layout */
+}
+
+.input-group input {
+    width: 100%;
+    /* add extra top padding so input text doesn't sit under the label */
+    padding: 18px 12px 12px 12px;
+    border-radius: 10px;
+    border: 1px solid #87cefa;
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    font-size: 15px;
+    line-height: 1.2;
+    min-height: 46px;
+    backdrop-filter: blur(10px);
+    transition: all 0.28s ease;
+}
+
+.input-group input::placeholder {
+    color: transparent;
+}
+
+.input-group label {
+    position: absolute;
+    left: 12px;
+    /* place label near the top edge so it visually overlaps the input border */
+    top: 8px;
+    transform: none;
+    color: rgba(255, 255, 255, 0.65);
     font-size: 14px;
-    color: #000000;
-    cursor: pointer;
+    pointer-events: none;
+    transition: all 0.25s ease;
+    background: linear-gradient(135deg, #2d3561 0%, #1a1a2e 100%);
+    padding: 2px 8px; /* give label a pill-like background so it overlaps border */
+    border-radius: 8px;
+    z-index: 2;
 }
 
-.hidden {
-    display: none !important;
+.input-group input:focus {
+    outline: none;
+    background: rgba(135, 206, 250, 0.2);
+    box-shadow: 0 0 10px rgba(135, 206, 250, 0.5);
 }
+
+/* Floating state (when input is focused or has value) */
+.input-group input:focus ~ label,
+.input-group input:not(:placeholder-shown) ~ label,
+.input-group input.filled ~ label {
+    top: -14px; /* lift label higher so it overlaps the input border */
+    font-size: 12px;
+    color: #87cefa;
+    background: linear-gradient(135deg, #2d3561 0%, #1a1a2e 100%);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+}
+
+.auth-face input {
+    width: 100%;
+    padding: 14px 12px;
+    border-radius: 10px;
+    border: 1px solid #87cefa;
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    font-size: 15px;
+    line-height: 1.2;
+    min-height: 46px;
+    backdrop-filter: blur(10px);
+    transition: all 0.28s ease;
+}
+
+.auth-face input::placeholder {
+    /* hide native placeholder to avoid duplicate text with floating labels */
+    color: transparent;
+    font-size: 14px;
+}
+
+.auth-face input:focus {
+    outline: none;
+    background: rgba(135, 206, 250, 0.2);
+    box-shadow: 0 0 10px rgba(135, 206, 250, 0.5);
+}
+
+.auth-face button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 8px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #87cefa 0%, #5f9eea 100%);
+    color: #fff;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.22s ease;
+    box-shadow: 0 6px 18px rgba(135, 206, 250, 0.45);
+}
+
+.auth-face button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(135, 206, 250, 0.6);
+}
+
+.auth-face .link {
+    margin-top: 0;
+    font-size: 14px;
+    color: #87cefa;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.auth-face .link:hover {
+    color: #5f9eea;
+    text-decoration: underline;
+}
+
 
 /* MAIN / HEADER / MENU / MAIN-CONTENT */
 #main {
     width: 100%;
     height: 100vh;
     display: block;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+#main:not(.hidden) {
+    opacity: 1;
+    visibility: visible;
+    animation: fadeIn 0.6s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .header {
-    color: #000000;
+    color: #ffffff;
     width: 100%;
     height: 70px;
     display: flex;
     align-items: center;
-    background-color: #f0f0f0;
-    /* sáng hơn */
+    background: linear-gradient(90deg, #16213e 0%, #1a1a2e 100%);
     padding: 0 35px;
-    border-bottom: 0.8px solid #d3d3d3;
+    border-bottom: 1px solid #87cefa;
+    box-shadow: 0 2px 10px rgba(135, 206, 250, 0.2);
+    animation: slideInDown 0.6s ease-out;
+}
+
+@keyframes slideInDown {
+    from {
+        transform: translateY(-70px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .header h2 {
-    margin-top: 20px;
-    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 0;
+    color: #87cefa;
+    text-shadow: 0 2px 10px rgba(135, 206, 250, 0.3);
 }
 
-#logoutBtn {
-    color: #000000;
-    margin: auto;
+/* old header logout button removed — profile panel now provides logout */
+
+/* Header actions: profile */
+.header-actions {
     position: absolute;
-    transform: scale(0.8);
     right: 20px;
-    background-color: #87cefa;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    width: 100px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-#logoutBtn:hover {
-    background-color: #7ec0ee;
+.profile-btn {
+    background: transparent;
+    border: none;
+    color: #87cefa;
+    font-size: 22px;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 8px;
 }
+.profile-btn:hover { background: rgba(135,206,250,0.06); }
+
+.profile-panel {
+    position: absolute;
+    top: 64px;
+    right: 20px;
+    width: 260px;
+    background: linear-gradient(180deg, #1f2a4a, #16213e);
+    border: 1px solid rgba(135,206,250,0.12);
+    border-radius: 12px;
+    box-shadow: 0 14px 40px rgba(0,0,0,0.6);
+    z-index: 60;
+    padding: 14px;
+}
+.profile-panel.hidden { display: none; }
+.profile-inner { display:flex; flex-direction:column; gap:10px; align-items:flex-start; }
+.profile-avatar { font-size: 46px; color:#87cefa; align-self:center; }
+.profile-info { width:100%; text-align:left; }
+.profile-name { color:#fff; font-weight:700; font-size:15px; margin-bottom:6px; text-align:center; }
+.profile-email { color: rgba(255,255,255,0.8); font-size:13px; display:flex; align-items:center; gap:8px; justify-content:center }
+.btn-logout {
+    margin-top:8px;
+    width:100%;
+    padding:8px 10px;
+    border-radius:8px;
+    border:none;
+    background: linear-gradient(135deg,#ff6b6b,#ff4d4d);
+    color:#fff;
+    cursor:pointer;
+}
+
 
 .main-content {
     display: flex;
@@ -192,7 +337,7 @@ button:hover {
 }
 
 .menu {
-    background-color: #f0f0f0;
+    background: linear-gradient(180deg, #16213e 0%, #1a1a2e 100%);
     font-size: 20px;
     height: 100vh;
     padding-top: 20px;
@@ -200,38 +345,53 @@ button:hover {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    border-right: 0.8px solid #d3d3d3;
+    border-right: 1px solid #87cefa;
+    animation: slideInLeft 0.6s ease-out 0.1s both;
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-200px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 .menu a {
-    color: #000000;
+    color: #87cefa;
     text-decoration: none;
-    font-size: 18px;
-    padding: 10px 12px;
-    border-radius: 5px;
-    transition: 0.3s;
+    font-size: 16px;
+    padding: 12px 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
 }
 
 .menu a:hover {
-    background-color: hsl(0, 0%, 58%);
-    /* sáng hơn khi hover */
+    background-color: rgba(135, 206, 250, 0.2);
+    border-left-color: #87cefa;
+    padding-left: 20px;
+    color: #ffffff;
 }
 
 /* CONTENT-AREA + FORM NHẬP CHI TIÊU */
 .content-area {
     display: flex;
-    background-color: #f0f0f0;
-    /* sáng hơn */
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     flex: 1;
 }
 
 .content-area .container {
     margin: 20px 40px;
     height: 400px;
-    background: #ffffff;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, #2d3561 0%, #1a1a2e 100%);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5);
+    border: 1px solid #87cefa;
     width: 300px;
     gap: 20px;
     text-align: center;
@@ -247,11 +407,29 @@ button:hover {
 #expenseNameInput,
 #expenseInput,
 #dateInput {
-    height: 60px;
-    padding: 15px 20px;
-    font-size: 18px;
-    border-radius: 20px;
+    height: 45px;
+    padding: 12px 15px;
+    font-size: 14px;
+    border-radius: 8px;
     width: 100%;
+    border: 1px solid #87cefa;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+#expenseNameInput::placeholder,
+#expenseInput::placeholder,
+#dateInput::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+#expenseNameInput:focus,
+#expenseInput:focus,
+#dateInput:focus {
+    outline: none;
+    background: rgba(135, 206, 250, 0.2);
+    box-shadow: 0 0 10px rgba(135, 206, 250, 0.5);
 }
 
 .info-box .item {
@@ -265,25 +443,29 @@ button:hover {
 }
 
 .info-box h2 {
-    color: #000000;
-    border-bottom: #d3d3d3 0.3px solid;
+    color: #87cefa;
+    border-bottom: 1px solid #87cefa;
+    margin-bottom: 15px;
 }
 
 .add-expense-btn {
     width: 100%;
-    padding: 15px;
-    margin-top: 20px;
+    padding: 12px;
+    margin-top: 15px;
     border: none;
-    border-radius: 50px;
-    background-color: #87cefa;
-    color: #000000;
-    font-size: 18px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #87cefa 0%, #5f9eea 100%);
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(135, 206, 250, 0.4);
 }
 
 .add-expense-btn:hover {
-    background-color: #7ec0ee;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(135, 206, 250, 0.6);
 }
 
 /* EXPENSE LIST – ITEM – DELETE BUTTON */
@@ -293,22 +475,22 @@ button:hover {
     width: 100%;
     height: 100vh;
     margin: 10px 40px;
-    background: #ffffff;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
-    border-bottom: #d3d3d3 0.3px solid;
-    text-align: center;
+    background: linear-gradient(135deg, #2d3561 0%, #1a1a2e 100%);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5);
+    border: 1px solid #87cefa;
+    text-align: left;
     overflow-y: auto;
 }
 
 .expense-list-container h2 {
-    color: #000000;
-    border-bottom: 1px solid #d3d3d3;
-    padding-bottom: 10px;
+    color: #87cefa;
+    border-bottom: 1px solid #87cefa;
+    padding-bottom: 15px;
     margin-bottom: 15px;
-    text-align: start;
-    padding-left: 10px;
+    text-align: left;
+    padding-left: 0;
 }
 
 .day-container {
@@ -319,7 +501,7 @@ button:hover {
 .date-col {
     width: 120px;
     font-weight: bold;
-    color: #333333;
+    color: #87cefa;
     padding-right: 15px;
     text-align: left;
 }
@@ -327,7 +509,7 @@ button:hover {
 .day-title {
     margin: 0;
     font-size: 18px;
-    color: #000000;
+    color: #87cefa;
 }
 
 .expenses-col {
@@ -340,24 +522,18 @@ button:hover {
 .expense-item {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 12px 15px;
     border-radius: 8px;
-    background: #f0f0f0;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
-    font-size: 20px;
+    background: rgba(135, 206, 250, 0.1);
+    border: 1px solid #87cefa;
+    font-size: 16px;
     font-weight: 600;
-    color: #000000;
-    cursor: default;
-}
-
-.expense-item {
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.3s ease;
     position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     padding-right: 25px;
-    /*chừa chỗ cho nút xoá xuất hiện */
-    transition: all 0.25s ease;
 }
 
 /* Khi item được click → điều khiển bằng class */
@@ -370,14 +546,13 @@ button:hover {
 .delete-btn {
     position: absolute;
     right: 10px;
-    top: 25%;
+    top: 50%;
     transform: translateY(-50%) translateX(20px);
-    /* ban đầu trượt ra ngoài */
     background: #ff4d4d;
     border: none;
     width: 30px;
     height: 30px;
-    border-radius: 10%;
+    border-radius: 50%;
     color: white;
     display: flex;
     justify-content: center;
@@ -388,6 +563,7 @@ button:hover {
     transition: all 0.25s ease;
 }
 
+.expense-item:hover .delete-btn,
 .expense-item.active .delete-btn {
     opacity: 1;
     transform: translateY(-50%) translateX(0);
@@ -396,35 +572,37 @@ button:hover {
 /* TOTALS BOX */
 .totals-container {
     width: 300px;
-    margin-left: -10px;
-    background: #ffffff;
+    /* shift slightly left to align better with the form */
+    margin-left: -20px;
+    background: linear-gradient(135deg, #2d3561 0%, #1a1a2e 100%);
     margin-top: 40px;
-    padding: 15px;
-    border-radius: 5px;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #87cefa;
     text-align: left;
-    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5);
 }
 
 .totals-container h2 {
-    border-bottom: 1px solid #d3d3d3;
-    margin-bottom: 10px;
-    color: #000000;
+    border-bottom: 1px solid #87cefa;
+    margin-bottom: 15px;
+    color: #87cefa;
     font-size: 18px;
 }
 
 .totals-container p {
-    margin: 5px 0;
-    font-size: 18px;
+    margin: 10px 0;
+    font-size: 16px;
+    color: #ffffff;
 }
 
 /* ALERT BOX + CONFIRM BOX */
 .alert {
-    background: #fff8e7;
-    /* vàng nhạt nổi bật */
-    color: #8f6a6a;
-    padding: 15px 10px;
-    border-radius: 5px;
-    border: 1px solid #d6e9c6;
+    background: linear-gradient(135deg, #2d3561 0%, #1a1a2e 100%);
+    color: #87cefa;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border: 1px solid #87cefa;
     width: 90%;
     max-width: 600px;
     position: fixed;
@@ -434,6 +612,19 @@ button:hover {
     display: flex;
     align-items: center;
     z-index: 999;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5);
+    animation: slideDown 0.4s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateX(-50%) translateY(-100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
 }
 
 .alert.hidden {
@@ -449,6 +640,12 @@ button:hover {
     cursor: pointer;
     font-size: 20px;
     margin-left: 10px;
+    color: #87cefa;
+    transition: color 0.3s ease;
+}
+
+.alert .close-btn:hover {
+    color: #5f9eea;
 }
 
 #confirmBox {
@@ -456,49 +653,62 @@ button:hover {
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background: #fff8e7; /* nền vàng nhạt */
-    color: #8f6a6a;
+    background: linear-gradient(135deg, #2d3561 0%, #1a1a2e 100%);
+    color: #87cefa;
     padding: 15px 20px;
-    border-radius: 5px;
-    border: 1px solid #d6e9c6;
+    border-radius: 8px;
+    border: 1px solid #87cefa;
     width: auto;
     max-width: 600px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
     z-index: 9999;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5);
 }
 .button-group {
     display: flex;
     justify-content: flex-end;
-    gap: 5px;
+    gap: 8px;
 }
 
 #confirmBox button {
-    width: 50px;
-    padding: 6px;
-    border-radius: 5px;
+    width: 70px;
+    padding: 8px 12px;
+    border-radius: 6px;
     cursor: pointer;
     margin: 0;
     font-weight: bold;
+    transition: all 0.3s ease;
+    border: none;
 }
 
     
 
 #confirmYes {
-    background-color: #ff0b0b;
+    background-color: #ff4d4d;
     color: #ffffff;
-    border: none;
+}
+
+#confirmYes:hover {
+    background-color: #ff6666;
+    transform: translateY(-2px);
 }
 
 #confirmNo {
-    background-color: #ccc;
-    color: #000;
-    border: none;
+    background-color: rgba(135, 206, 250, 0.2);
+    color: #87cefa;
+    border: 1px solid #87cefa;
 }
 
+#confirmNo:hover {
+    background-color: rgba(135, 206, 250, 0.3);
+    transform: translateY(-2px);
+}
 
-
+.hidden {
+  display: none !important;
+}
 
 
 /* RESPONSIVE (MEDIA QUERIES) */
@@ -553,13 +763,7 @@ button:hover {
         height: auto;
     }
 
-    /* Nút logout */
-    #logoutBtn {
-        position: absolute;
-        transform: scale(0.8);
-        width: 20%;
-        margin: 10px auto;
-    }
+    /* old logout button removed */
 
     @media (max-width: 768px) {
         #confirmBox {

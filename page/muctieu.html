@@ -5,24 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/QL_chitieu/view/style.css">
+    <link rel="stylesheet" href="../view/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="budget-savings.css">
+    <link rel="stylesheet" href="./budget-savings.css">
 </head>
 
 <body>
     <div class="header">
         <h2>Mục Tiêu Tiết Kiệm</h2>
-        <button id="logoutBtn" onclick="logout()">
-            <i class="fas fa-sign-out-alt"></i> Đăng xuất
-        </button>
+       
     </div>
 
     <div class="main-content">
         <nav class="menu">
-            <a href="/QL_chitieu/view/">Trang Chủ</a>
-            <a href="/QL_chitieu/page/muctieu.html">Mục Tiêu Tiết Kiệm</a>
-            <a href="/QL_chitieu/page/thongke.html">Báo Cáo Thống Kê</a>
+            <a href="../view/">Trang Chủ</a>
+            <a href="./muctieu.html">Mục Tiêu Tiết Kiệm</a>
+            <a href="./thongke.html">Báo Cáo Thống Kê</a>
         </nav>
         <section class="content-area" style="display: flex; gap: 20px;">
 
@@ -45,11 +43,10 @@
 
             <!-- Bên phải: Cảnh báo & Ngân sách -->
             <!-- Cảnh báo chi tiêu và nhập ngân sách -->
-            <div class="right-panel" style="margin: 20px; flex: 1; display: flex; flex-direction: column; gap: 20px;">
+            <div class="right-panel">
 
                 <!-- Nhập ngân sách -->
-                <div class="budget-container"
-                    style="background-color: #fff; padding: 15px; border-radius: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
+                <div class="budget-container">
                     <h3>Ngân sách tháng</h3>
                     <input type="number" id="monthlyBudgetInput" placeholder="Nhập ngân sách (đ)" min="0"
                         style="width: 80%; padding: 8px; margin-top: 10px; border-radius: 5px; border: 1px solid #ccc;" />
@@ -60,12 +57,10 @@
                 </div>
 
                 <!-- Cảnh báo chi tiêu -->
-                <div id="expenseAlert" class="alert-box"
-                    style="display: none; flex-direction: column; gap: 10px; padding: 20px; border-radius: 10px; background-color: #fff3cd;">
+                <div id="expenseAlert" class="alert-box">
                     <strong id="alertMessage">⚠️ Bạn sắp vượt ngân sách!</strong>
-                    <div class="progress-container"
-                        style="background-color: #eee; border-radius: 10px; overflow: hidden; height: 20px;">
-                        <div id="expenseProgress" style="width: 0%; height: 100%; background-color: green;"></div>
+                    <div class="progress-container">
+                        <div id="expenseProgress" style="width: 0%; height: 100%;"></div>
                     </div>
                     <div style="display: flex; justify-content: space-between;">
                         <span id="totalExpenseDisplay">Chi tiêu: 0đ</span>
@@ -79,7 +74,7 @@
 
         </section>
     </div>
-    <script src="/QL_chitieu/page/muctieu.js"></script>
+    <script src="./muctieu.js"></script>
 </body>
 
 </html>

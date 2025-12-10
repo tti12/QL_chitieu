@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Login</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="icon" href="../../infor/favicon.png" type="image/x-icon" />
+</head>
+<body class="center-body">
+    <!-- ALERT -->
+    <div id="alertBox" class="alert hidden" role="alert" aria-live="polite">
+        <span id="alertMessage"></span>
+        <button class="close-btn" id="alertClose" aria-label="Đóng">&times;</button>
+    </div>
+
+    <!-- AUTH -->
+    <div class="auth-wrapper" id="authWrapper">
+        <div class="auth-icon" aria-hidden="true">
+            <i class="fas fa-user-circle" aria-hidden="true"></i>
+        </div>
+        <div class="auth-card" id="authCard">
+            <!-- LOGIN -->
+            <div class="auth-face auth-front">
+                <h2>Đăng nhập</h2>
+                <input type="text" id="loginUser" placeholder="Tên đăng nhập" autocomplete="username" />
+                <input type="password" id="loginPass" placeholder="Mật khẩu" autocomplete="current-password" />
+                 <button id="loginBtn" aria-label="Đăng nhập"><i class="fas fa-sign-in-alt" aria-hidden="true"></i> Đăng nhập</button>
+                      <div class="link" id="toRegister" role="button" aria-label="Tạo tài khoản" title="Tạo tài khoản">
+                          <i class="fas fa-user-plus" aria-hidden="true"></i>
+                      </div>
+            </div>
+
+            <!-- REGISTER -->
+            <div class="auth-face auth-back">
+                <h2>Đăng ký</h2>
+                <input type="text" id="regUser" placeholder="Tên đăng nhập" autocomplete="username" />
+                <input type="password" id="regPass" placeholder="Mật khẩu" autocomplete="new-password" />
+                    <button id="regBtn" aria-label="Đăng ký"><i class="fas fa-user-plus" aria-hidden="true"></i> Tạo tài khoản</button>
+                    <div class="link" id="toLogin" role="button" aria-label="Quay lại đăng nhập" title="Quay lại đăng nhập">
+                        <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN (ẩn khi chưa đăng nhập) -->
+    <div id="main" class="hidden">
+        <div class="header">
+            <h2>Chào mừng bạn, <span id="userLabel"></span></h2>
+            <button id="logoutBtn" title="Đăng xuất"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
+        </div>
+
+        <div class="main-content">
+            <nav class="menu">
+                <a href="./index.html">Trang Chủ</a>
+                <a href="./muctieu.html">Mục Tiêu Tiết Kiệm</a>
+                <a href="./thongke.html">Báo Cáo Thống Kê</a>
+            </nav>
+
+            <div class="content-area">
+                <section class="container">
+                    <div class="info-box">
+                        <h2>Thêm Chi Tiêu Mới</h2>
+                        <div class="item">
+                            <input type="text" id="expenseNameInput" placeholder="Nhập tên khoản chi" />
+                        </div>
+                        <div class="item">
+                            <input type="number" id="expenseInput" placeholder="Nhập số tiền" oninput="updateInfo()" />
+                        </div>
+                        <div class="item">
+                            <input type="date" id="dateInput" />
+                        </div>
+                        <button class="add-expense-btn" id="addExpenseBtn">Thêm Chi Tiêu</button>
+                    </div>
+
+                    <div class="totals-container">
+                        <h2>Tổng Chi Tiêu</h2>
+                        <p>Hôm nay: <span id="todayTotal">0đ</span></p>
+                        <p>Trong tháng: <span id="monthTotal">0đ</span></p>
+                    </div>
+                </section>
+
+                <section class="expense-list-container">
+                    <h2>Chi tiêu theo ngày</h2>
+                    <div id="expenseList" aria-live="polite"></div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONFIRM -->
+    <div id="confirmBox" class="confirm hidden" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="confirm-inner">
+            <p id="confirmMessage">Bạn có chắc muốn xóa khoản chi này?</p>
+            <div class="button-group">
+                <button id="confirmYes">Xóa</button>
+                <button id="confirmNo">Hủy</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>

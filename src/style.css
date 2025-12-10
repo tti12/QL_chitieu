@@ -1,0 +1,690 @@
+/* GLOBAL RESET */
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    height: 100vh;
+    color: #ffffff;
+}
+
+body.center-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+/* ================================
+   LOGIN & REGISTER – FLIP CARD
+================================ */
+
+.auth-wrapper {
+    width: 320px;
+    height: 380px;
+    position: relative;
+    perspective: 1000px;
+    animation: spinIn 0.8s ease-out;
+}
+
+/* Small decorative icon above the auth card */
+.auth-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 56px;
+    color: #87cefa;
+    margin-bottom: 12px;
+    text-shadow: 0 4px 18px rgba(135,206,250,0.2);
+    transition: transform 0.45s ease, opacity 0.45s ease;
+}
+.auth-icon i {
+    display: inline-block;
+}
+.auth-icon:hover {
+    transform: translateY(-4px) scale(1.02);
+}
+
+@keyframes spinIn {
+    from {
+        opacity: 0;
+        transform: rotateX(-30deg) rotateY(30deg) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: rotateX(0) rotateY(0) scale(1);
+    }
+}
+
+.auth-card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.8s ease;
+    transform-style: preserve-3d;
+}
+
+.auth-card.flip {
+    transform: rotateY(180deg);
+}
+
+.auth-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    background: linear-gradient(135deg, #2d3561 0%, #1a1a2e 100%);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.5);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 2px solid #87cefa;
+}
+
+.auth-front {
+    transform: rotateY(0deg);
+}
+
+.auth-back {
+    transform: rotateY(180deg);
+}
+
+.auth-face h2 {
+    margin-bottom: 25px;
+    color: #87cefa;
+    font-size: 24px;
+    text-shadow: 0 2px 10px rgba(135, 206, 250, 0.3);
+}
+
+.auth-face input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #87cefa;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    font-size: 14px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.auth-face input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.auth-face input:focus {
+    outline: none;
+    background: rgba(135, 206, 250, 0.2);
+    box-shadow: 0 0 10px rgba(135, 206, 250, 0.5);
+}
+
+.auth-face button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #87cefa 0%, #5f9eea 100%);
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(135, 206, 250, 0.4);
+}
+
+.auth-face button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(135, 206, 250, 0.6);
+}
+
+.auth-face .link {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #87cefa;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.auth-face .link:hover {
+    color: #5f9eea;
+    text-decoration: underline;
+}
+
+
+/* MAIN / HEADER / MENU / MAIN-CONTENT */
+#main {
+    width: 100%;
+    height: 100vh;
+    display: block;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+#main:not(.hidden) {
+    opacity: 1;
+    visibility: visible;
+    animation: fadeIn 0.6s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.header {
+    color: #ffffff;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(90deg, #16213e 0%, #1a1a2e 100%);
+    padding: 0 35px;
+    border-bottom: 1px solid #87cefa;
+    box-shadow: 0 2px 10px rgba(135, 206, 250, 0.2);
+    animation: slideInDown 0.6s ease-out;
+}
+
+@keyframes slideInDown {
+    from {
+        transform: translateY(-70px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.header h2 {
+    margin-top: 0;
+    color: #87cefa;
+    text-shadow: 0 2px 10px rgba(135, 206, 250, 0.3);
+}
+
+#logoutBtn {
+    color: #fff;
+    margin: auto;
+    position: absolute;
+    transform: scale(1);
+    right: 20px;
+    background: linear-gradient(135deg, #87cefa 0%, #5f9eea 100%);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 110px;
+    padding: 8px 12px;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(135, 206, 250, 0.4);
+    transition: all 0.3s ease;
+}
+
+#logoutBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(135, 206, 250, 0.6);
+}
+
+.main-content {
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+}
+
+.menu {
+    background: linear-gradient(180deg, #16213e 0%, #1a1a2e 100%);
+    font-size: 20px;
+    height: 100vh;
+    padding-top: 20px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-right: 1px solid #87cefa;
+    animation: slideInLeft 0.6s ease-out 0.1s both;
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-200px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.menu a {
+    color: #87cefa;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 12px 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+}
+
+.menu a:hover {
+    background-color: rgba(135, 206, 250, 0.2);
+    border-left-color: #87cefa;
+    padding-left: 20px;
+    color: #ffffff;
+}
+
+/* CONTENT-AREA + FORM NHẬP CHI TIÊU */
+.content-area {
+    display: flex;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    flex: 1;
+}
+
+.content-area .container {
+    margin: 20px 40px;
+    height: 400px;
+    background: linear-gradient(135deg, #2d3561 0%, #1a1a2e 100%);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5);
+    border: 1px solid #87cefa;
+    width: 300px;
+    gap: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.info-box {
+    display: flex;
+    flex-direction: column;
+}
+
+#expenseNameInput,
+#expenseInput,
+#dateInput {
+    height: 45px;
+    padding: 12px 15px;
+    font-size: 14px;
+    border-radius: 8px;
+    width: 100%;
+    border: 1px solid #87cefa;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+#expenseNameInput::placeholder,
+#expenseInput::placeholder,
+#dateInput::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+#expenseNameInput:focus,
+#expenseInput:focus,
+#dateInput:focus {
+    outline: none;
+    background: rgba(135, 206, 250, 0.2);
+    box-shadow: 0 0 10px rgba(135, 206, 250, 0.5);
+}
+
+.info-box .item {
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 15px 20px;
+    font-size: 16px;
+    border-radius: 20px;
+}
+
+.info-box h2 {
+    color: #87cefa;
+    border-bottom: 1px solid #87cefa;
+    margin-bottom: 15px;
+}
+
+.add-expense-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #87cefa 0%, #5f9eea 100%);
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(135, 206, 250, 0.4);
+}
+
+.add-expense-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(135, 206, 250, 0.6);
+}
+
+/* EXPENSE LIST – ITEM – DELETE BUTTON */
+.expense-list-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    margin: 10px 40px;
+    background: linear-gradient(135deg, #2d3561 0%, #1a1a2e 100%);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5);
+    border: 1px solid #87cefa;
+    text-align: left;
+    overflow-y: auto;
+}
+
+.expense-list-container h2 {
+    color: #87cefa;
+    border-bottom: 1px solid #87cefa;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    text-align: left;
+    padding-left: 0;
+}
+
+.day-container {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.date-col {
+    width: 120px;
+    font-weight: bold;
+    color: #87cefa;
+    padding-right: 15px;
+    text-align: left;
+}
+
+.day-title {
+    margin: 0;
+    font-size: 18px;
+    color: #87cefa;
+}
+
+.expenses-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.expense-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    border-radius: 8px;
+    background: rgba(135, 206, 250, 0.1);
+    border: 1px solid #87cefa;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    padding-right: 25px;
+}
+
+/* Khi item được click → điều khiển bằng class */
+.expense-item.active .exp-amount {
+    transform: translateX(-20px);
+    transition: transform 0.25s ease;
+}
+
+/* Nút xoá */
+.delete-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%) translateX(20px);
+    background: #ff4d4d;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.25s ease;
+}
+
+.expense-item:hover .delete-btn,
+.expense-item.active .delete-btn {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+}
+
+/* TOTALS BOX */
+.totals-container {
+    width: 300px;
+    /* shift slightly left to align better with the form */
+    margin-left: -20px;
+    background: linear-gradient(135deg, #2d3561 0%, #1a1a2e 100%);
+    margin-top: 40px;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #87cefa;
+    text-align: left;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5);
+}
+
+.totals-container h2 {
+    border-bottom: 1px solid #87cefa;
+    margin-bottom: 15px;
+    color: #87cefa;
+    font-size: 18px;
+}
+
+.totals-container p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+/* ALERT BOX + CONFIRM BOX */
+.alert {
+    background: linear-gradient(135deg, #2d3561 0%, #1a1a2e 100%);
+    color: #87cefa;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border: 1px solid #87cefa;
+    width: 90%;
+    max-width: 600px;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    z-index: 999;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5);
+    animation: slideDown 0.4s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateX(-50%) translateY(-100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+.alert.hidden {
+    display: none;
+}
+
+.alert #alertMessage {
+    flex: 1;
+    text-align: center;
+}
+
+.alert .close-btn {
+    cursor: pointer;
+    font-size: 20px;
+    margin-left: 10px;
+    color: #87cefa;
+    transition: color 0.3s ease;
+}
+
+.alert .close-btn:hover {
+    color: #5f9eea;
+}
+
+#confirmBox {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #2d3561 0%, #1a1a2e 100%);
+    color: #87cefa;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border: 1px solid #87cefa;
+    width: auto;
+    max-width: 600px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 9999;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5);
+}
+.button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+#confirmBox button {
+    width: 70px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 0;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+    
+
+#confirmYes {
+    background-color: #ff4d4d;
+    color: #ffffff;
+}
+
+#confirmYes:hover {
+    background-color: #ff6666;
+    transform: translateY(-2px);
+}
+
+#confirmNo {
+    background-color: rgba(135, 206, 250, 0.2);
+    color: #87cefa;
+    border: 1px solid #87cefa;
+}
+
+#confirmNo:hover {
+    background-color: rgba(135, 206, 250, 0.3);
+    transform: translateY(-2px);
+}
+
+.hidden {
+  display: none !important;
+}
+
+
+/* RESPONSIVE (MEDIA QUERIES) */
+@media (max-width: 768px) {
+
+    /* Layout tổng thể dọc */
+    .main-content {
+        flex-direction: column;
+        align-items: center;
+        /* canh giữa toàn bộ */
+    }
+
+    /* Menu nằm ngang hoặc dọc tuỳ nội dung */
+    .menu {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 10px 0;
+        text-align: center;
+        flex-wrap: wrap;
+        /* wrap nếu nhiều link */
+    }
+
+    /* Container trong content-area */
+    .content-area {
+        flex-direction: column;
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .content-area .container {
+        width: 90%;
+        margin: 10px auto;
+        height: auto;
+        /* để co giãn theo nội dung */
+    }
+
+    /* Expense list container */
+    .expense-list-container {
+        width: 90%;
+        margin: 10px auto;
+        height: auto;
+        /* tránh 100vh → không chồng lên */
+    }
+
+    /* Totals container */
+    .totals-container {
+        width: 90%;
+        margin: 20px auto;
+        height: auto;
+    }
+
+    /* Nút logout */
+    #logoutBtn {
+        position: absolute;
+        transform: scale(0.8);
+        width: 20%;
+        margin: 10px auto;
+    }
+
+    @media (max-width: 768px) {
+        #confirmBox {
+            width: 80%;
+            max-width: none;
+        }
+    }
+}
+
+
